@@ -1,0 +1,470 @@
+STUDENT TABLE
+CREATE TABLE STUDENT ( StudentNo INTEGER, 
+Firstname CHAR(30), 
+LastName CHAR(30),
+Gender varchar2(10),
+DateOfBirth DATE, 
+Address VARCHAR2(30), 
+CellPhone INTEGER, PRIMARY KEY (StudentNo) );
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+FINE TABLE
+
+CREATE TABLE FINE ( InvoiceNo INTEGER,
+Due_Date DATE, 
+Amount INTEGER, 
+PRIMARY KEY (InvoiceNo) );
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+CATEGORY TABLE
+
+CREATE TABLE CATEGORY(Category_ID Integer,
+CategoryName Varchar2(30)
+PRIMARY KEY (Category_ID));+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+BOOK TABLE
+
+CREATE TABLE BOOK ( ISBNNo INTEGER,
+Title CHAR(30),
+Author CHAR(30), 
+Status CHAR(30),  
+Date_published Date, 
+PRIMARY KEY (ISBNNo),
+Foreing KEY (Category_ID) references Category,
+Foreing KEY (Publisher_Id) references Publisher );
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+PUBLISHER TABLE
+
+CREATE TABLE PUBLISHER ( Publisher_Id INTEGER, 
+PublisherName CHAR(30), 
+PublisherLastName VARCHAR2(30),  
+Year_Published Date, PRIMARY KEY (Publisher_Id) );
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EMPLOYEE TABLE
+
+CREATE TABLE EMPLOYEE ( Employee_No INTEGER, 
+FirstName CHAR(30),
+LastName CHAR(30), 
+ID_NO Varchar(30),
+Gender char(10),
+Name CHAR(30),
+DateOfBirth Date, 
+Address VARCHAR(30), 
+Cell_phone INTEGER, PRIMARY KEY (Employee_Id) );
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ORDER TABLE
+
+CREATE TABLE ORDER ( OrderID INTEGER,  
+Quantity INTEGER, 
+ISBNNo INTEGER,
+Employee_No, 
+Supplier_ID INTEGER, PRIMARY KEY (OrderNo),
+FOREIGN KEY (ISBNNo) REFERENCES BOOK,
+FOREIGN KEY (Supplier_ID) REFERENCES Supplier,
+FOREIGN KEY (Employee_No) REFERENCES Employee);
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Supplier TABLE
+
+CREATE TABLE Supplier ( Supplier_Id INTEGER, 
+FirstName CHAR(30),
+LastName CHAR(30), 
+ID_NO Varchar(30),
+Gender char(10),
+Name CHAR(30),
+DateOfBirth Date, 
+Address VARCHAR(30), 
+Cell_phone INTEGER, PRIMARY KEY (Supplier_Id) );
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ISSUE_BOOK TABLE
+
+
+CREATE TABLE ISSUE_BOOK (Issue_ID Integer, 
+StudentNo INTEGER, 
+ISBNNo INTEGER, 
+InvoiceNo INTEGER, 
+Employee_No INTEGER, 
+Date_Issue DATE, 
+Date_Return DATE,
+PRIMARY KEY (Issue_ID),
+FOREIGN KEY (ISBNNo) REFERENCES BOOK,
+FOREIGN KEY (StudentNo) REFERENCES STUDENT,
+FOREIGN KEY (InvoiceNo) REFERENCES FINE,
+FOREIGN KEY (Employee_No) REFERENCES Employee);
+
+-----------------------------------------------------------------
+
+INSERTING DATA
+
+INSERT INTO STUDENT(StudentNo, FirstName, LastName,DateOfBirth, Address, CellPhone ) 
+VALUES(5501, 'Mokena', 'Naledi','23-March-1992' ,'13 Melro Street', 0824424564);
+INSERT INTO STUDENT(StudentNo, FirstName, LastName,'23-March-1992', Address, Phone ) 
+VALUES(5502,'Manoto','Teboho','02-April-1988', '98 Palms Street', 0787544859);
+INSERT INTO STUDENT(StudentNo, FirstName, LastName,DateOfBirth, Address, Phone ) 
+VALUES(5503,'Sephooa','Tera','23-May-1982','Cas street', 07124926853);
+INSERT INTO STUDENT(StudentNo, FirstName, LastName,DateOfBirth, Address, Phone )
+VALUES(5504, 'Mahlaba', 'Mojalefa','23-December-1992','24 Uys Street', 0736892458);
+INSERT INTO STUDENT(StudentNo, FirstName, LastName,DateOfBirth, Address, Phone ) 
+VALUES(5505, 'Nonhle', 'Vladimier','23-November-1992', '04 Bedwoth Lake Street', 0254586245);
+INSERT INTO STUDENT(StudentNo, FirstName, LastName,DateOfBirth, Address, Phone ) 
+VALUES(5506, 'Mbali', 'De Kock','23-October-1992', '13 Swing Stas Street', 0825485664);
+
+
+INSERT INTO FINE(InvoiceNo, Due_Date, Amount)
+VALUES (001,'23-jan-12',5.00);
+INSERT INTO FINE(InvoiceNo,  Due_Date, Amount) 
+VALUES (002,'03-feb-12',5.00);
+INSERT INTO FINE(InvoiceNo, Due_Date, Amount) 
+VALUES (003,'02-apr-12',5.00);
+INSERT INTO FINE(InvoiceNo, Due_Date, Amount) 
+VALUES (004,'19-mar-09',5.00);
+INSERT INTO FINE(InvoiceNo, Due_Date, Fine_Amount)
+VALUES (005,'23-nov-11',5.00);
+INSERT INTO FINE(InvoiceNo, Due_Date, Fine_Amount)
+VALUES (006,'23-apr-11',5.00);
+
+
+INSERT INTO BOOK(ISBNNo, Title, Author, Status, Qty,Publisher_Id,Category_Id) 
+VALUES ('9780','Cyber law','T.Y.MANOTO','Available',1501);
+INSERT INTO BOOK(ISBNNo, Title, Author, Status, Qty,Publisher_Id,Category_Id) 
+VALUES ('9781','Cisco','P.I VAN ECK', 'Available',1503);
+INSERT INTO BOOK(ISBNNo, Title, Author, Status, Qty,Publisher_Id,Category_Id) 
+VALUES ('9782','Enterprise Analysis','A.J HARMSE','Available',1502);
+INSERT INTO BOOK(ISBNNo, Title, Author, Status, Qty,Publisher_Id,Category_Id) 
+VALUES ('9783','Modern Database','P.O GROGE','Available',1504);
+INSERT INTO BOOK(ISBNNo, Title, Author, Status, Qty,Publisher_Id,Category_Id) 
+VALUES ('9784','ASP.NET','T.Y.MKHASIBE','Available',1501);
+INSERT INTO BOOK(ISBNNo, Title, Author, Status, Qty,Publisher_Id,Category_Id) 
+VALUES ('9785','FUNDAMENTALS','P.K PUTUKA','Available',1503);
+
+
+INSERT INTO PUBLISHER(Publisher_Id, PublisherName, PublisherLastName, Year_Published) 
+VALUES (1501,'Thomas','Muller','23-May-1982');
+INSERT INTO PUBLISHER(Publisher_Id, PublisherName, PublisherLastName, Year_Published)  
+VALUES (1502,'Brain','Scott','23-May-1982');
+INSERT INTO PUBLISHER(Publisher_Id, PublisherName, PublisherLastName, Year_Published)  
+VALUES (1503,,'Joe','Scholes','23-May-1982');
+INSERT INTO PUBLISHER(Publisher_Id, PublisherName, PublisherLastName, Year_Published)  
+VALUES (1504,'Rashid','AmLah','23-May-1982');
+
+
+INSERT INTO EMPLOYEE(Employee_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone) 
+VALUES (500,'Nhlapo','Morena','65 Vuka Street SharpVille',920111110,'23-December-1992',0824952176);
+INSERT INTO EMPLOYEE(Employee_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone) 
+VALUES (501,'Mafuhla','Natal','596 Riebeck Street Vereeniging',0164892563);
+INSERT INTO EMPLOYEE(Employee_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone)
+VALUES (502,'Motaung','Lebohang','48 qwaw-qwa Street Sebokeng',920111110,'23-December-1992',0715961482);
+INSERT INTO EMPLOYEE(Employee_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone)
+VALUES (503,'van wyk','Vallie','16 Molt Street Vanderbijl Park',920111110,'23-December-1992',0168564899);
+INSERT INTO EMPLOYEE(Employee_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone) 
+VALUES (504,'Thomas','Maki','16 Huise Ave Vanderbijl Park',920111110,'23-December-1992',0256214899);
+INSERT INTO EMPLOYEE(Employee_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone)
+VALUES (505,'Theboho','Nkosi','16 Molthy Street Bedwoth Park',920111110,'23-December-1992',0145784899);
+
+
+INSERT INTO ORDER(OrderNo, Quantity, ISBNNo, Supplier_Id, Employee_Id,Date ) 
+VALUES (1600,4,'9780',1501,001,500,'03-MAR-10');
+INSERT INTO ORDERED(OrderNo, Quantity, ISBNNo, Supplier_Id, Employee_Id,Date ) 
+VALUES (1601,8,'9781',1502,002,501,'03-MAR-10');
+INSERT INTO ORDERED(OrderNo, Quantity, ISBNNo, Supplier_Id, Employee_Id,Date ) 
+VALUES (1602,8,'9782',1503,003,503,'03-MAR-10');
+INSERT INTO ORDERED(OrderNo, Quantity, ISBNNo, Supplier_Id, Employee_Id,Date) 
+VALUES (1603,4,'9783',1504,004,,504,'03-MAR-10');
+
+
+INSERT INTO ISSUE_BOOK(IssueID,StudentNo,ISBNNO, InvoiceNO, Employee_Id, IssueDate, ReturnDate) 
+VALUES (100,5501,'9780',001,500,'02-FEB-10','03-MAR-10');
+INSERT INTO ISSUE_BOOK(IssueID,StudentNo,ISBNNO, InvoiceNO, Employee_Id, IssueDate, ReturnDate) 
+VALUES (101,5502,'9781',002,501,'03-JAN-10','04-FEB-10');
+INSERT INTO ISSUE_BOOK(IssueID,StudentNo,ISBNNO, InvoiceNO, Employee_Id, IssueDate, ReturnDate) 
+VALUES (102,5503,'9780',003,502,'02-APR-11','03-MAY-11');
+INSERT INTO ISSUE_BOOK(IssueID,StudentNo,ISBNNO, InvoiceNO, Employee_Id, IssueDate, ReturnDate) 
+VALUES (103,5504,'9784',004,503,'04-JAN-11','05-FEB-11');
+INSERT INTO ISSUE_BOOK(IssueID,StudentNo,ISBNNO, InvoiceNO, Employee_Id, IssueDate, ReturnDate) 
+VALUES (104,5504,'9784',005,503,'04-DEC-11','05-JAN-12');
+INSERT INTO ISSUE_BOOK(IssueID,StudentNo,ISBNNO, InvoiceNO, Employee_Id, IssueDate, ReturnDate) 
+VALUES (105,5505,'9784',006,503,'04-DEC-11','05-JAN-12');
+
+
+INSERT INTO cATEGORY(cATEGORY_id,CategoryName)
+Values(100, 'Science');
+INSERT INTO cATEGORY(cATEGORY_id,CategoryName)
+Values(102, 'Technology');
+INSERT INTO cATEGORY(cATEGORY_id,CategoryName)
+Values(103, 'Programming');
+INSERT INTO cATEGORY(cATEGORY_id,CategoryName)
+Values(104, 'Health');
+
+
+INSERT INTO Supplier(Supplier_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone) 
+VALUES (500,'Nhlapo','Morena','65 Vuka Street SharpVille',920111110,'23-December-1992',0824952176);
+INSERT INTO Supplier(Supplier_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone) 
+VALUES (501,'Mafuhla','Natal','596 Riebeck Street Vereeniging',0164892563);
+INSERT INTO Supplier(Supplier_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone)
+VALUES (502,'Motaung','Lebohang','48 qwaw-qwa Street Sebokeng',920111110,'23-December-1992',0715961482);
+INSERT INTO Supplier(Supplier_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone)
+VALUES (503,'van wyk','Vallie','16 Molt Street Vanderbijl Park',920111110,'23-December-1992',0168564899);
+INSERT INTO Supplier(Supplier_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone) 
+VALUES (504,'Thomas','Maki','16 Huise Ave Vanderbijl Park',920111110,'23-December-1992',0256214899);
+INSERT INTO Supplier(Supplier_Id, FirstName, LastName,ID_No,DateOfBirth Address, Cell_phone)
+VALUES (505,'Theboho','Nkosi','16 Molthy Street Bedwoth Park',920111110,'23-December-1992',0145784899);
+
+------------------------------------------------------------------
+ Display data from tables;
+
+Select * from Category;
+Select * from Supplier;
+select * from STUDENT;
+select * from BOOK;
+select * from FINE;
+select * from EMPLOYEE;
+select * from PUBLISHER;
+select * from ISSUED_BOOK;
+select * from ORDER;
+
+
+------------------------------------------------------------------
+Update data in a table
+
+ IF YOU RETURN A BOOK
+
+DECLARE 
+V_ISBNNO NUMBER:= '&ISBNNO';
+V_COUNTER NUMBER := 0;
+BEGIN
+
+update BOOK set QTY = V_COUNTER + 1 where ISBNNO = V_ISBNNO;
+
+
+IF V_COUNTER <= 0 THEN
+
+update BOOK set STATUS = 'AVAILABLE' where ISBNNO = V_ISBNNO;
+ELSE
+update BOOK set STATUS = 'NOT AVAILABLE' where ISBNNO = V_ISBNNO;
+END IF;
+END;
+/
+
+
+IF YOU TAKE A BOOK
+
+DECLARE 
+V_ISBNNO NUMBER:= '&ISBNNO';
+V_COUNTER NUMBER := 0;
+BEGIN
+
+update BOOK set QTY = V_COUNTER - 1 where ISBNNO = V_ISBNNO;
+
+
+IF V_COUNTER >= 0 THEN
+
+update BOOK set STATUS = 'NOT AVAILABLE' where ISBNNO = V_ISBNNO;
+ELSE
+update BOOK set STATUS = 'AVAILABLE' where ISBNNO = V_ISBNNO;
+END IF;
+END;
+/
+
+------------------------------------------------------------------
+
+DELETING AN ORDER
+
+DECLARE
+  v_ORDERID   ORDER.ORDERNO%TYPE := '&ORDER'; 
+BEGIN							
+  DELETE FROM   ORDER
+  WHERE  ORDERID =v_ORDERID ;
+END;
+/
+
+------------------------------------------------------------------
+
+COMPOSITE DATA TYPE 
+
+ADDING A LOST BOOK TO A TABLE
+
+CREATE TABLE LOST_BOOKS(
+			L_ISBN NUMBER,
+			TITLE  CHAR(30),
+			DATE_PUBLISHED DATE,
+			STATUS VARCHAR2(20),
+			AUTHOR CHAR(30);
+
+DECLARE
+  v_ISBNNO number:= '&ISBNNO';
+  v_book_rec   BOOK%ROWTYPE;
+BEGIN
+ SELECT * INTO v_book_rec FROM BOOK
+ WHERE  ISBNNO = v_ISBNNO;
+ INSERT INTO 	LOST_BOOKS(L_ISBN, TITLE,AUTHOR, STATUS, DATE_PUBLISHED)  
+   VALUES (v_book_rec.ISBNNO, 
+           v_book_rec.TITLE,
+           v_book_rec.AUTHOR,
+	   v_book_rec.DATE_PUBLISHED, 
+           v_book_rec.STATUS);
+END;
+/
+
+-------------------------------------------------------------------
+
+CURSORS 
+WHEN YOU WANT TO DISPLAY STUDENTS BY THIER STUDENT NUMBER WITH A CUSOR
+
+
+DECLARE
+  CURSOR c_STUDENT_cursor IS 
+   SELECT LASTNAME, ADDRESS FROM STUDENT
+   WHERE STUDENTNO = '&STUDENTNO';
+  v_NAME STUDENT.LASTNAME%TYPE;
+  v_ADDRESS STUDENT.ADDRESS%TYPE;
+BEGIN
+  OPEN c_STUDENT_cursor;
+  FETCH c_STUDENT_cursor INTO v_NAME, v_ADDRESS;
+  DBMS_OUTPUT.PUT_LINE( 'STUDENT DETAILS: ' ||v_NAME ||'address:'||v_ADDRESS);  
+END;
+/
+
+------------------------------------------------------------------
+USER DEFINED EXCEPTION
+THAT HANDLES WRONG DATA ENTERED SEARCHING FOR A BOOK
+
+DECLARE 
+  v_ISBNNO  BOOK.ISBNNO%TYPE :='&ISBNNO';
+  v_TITLE BOOK.TITLE%TYPE :='&TITLE';
+  invalid_BOOK EXCEPTION;
+BEGIN
+  UPDATE BOOK
+  SET ISBNNO = v_ISBNNO
+  WHERE TITLE = v_TITLE;
+  IF SQL % NOTFOUND THEN
+    RAISE invalid_BOOK;
+	else 
+	dbms_output.put_line('book found');
+  END IF;
+  COMMIT;
+EXCEPTION
+WHEN invalid_BOOK THEN
+  DBMS_OUTPUT.PUT_LINE('NO SUCH BOOK IN THIS LIBRARY');
+END;
+/
+
+
+
+------------------------------------------------------------------
+PROCEDURE
+
+
+CREATE TABLE TRAINEE AS SELECT * FROM EMPLOYEE;
+CREATE PROCEDURE add_TRAINEE IS
+ v_TRAINEE_ID EMPLOYEE.EMPLOYEE_ID%TYPE;
+ v_SURNAME EMPLOYEE.LASTNAME%TYPE;
+BEGIN
+ v_TRAINEE_ID:='901';
+ v_SURNAME:='&LASTNAME';
+ INSERT INTO TRAINEE(EMPLOYEE_ID,LASTNAME)
+ VALUES(v_TRAINEE_ID,v_SURNAME);
+ DBMS_OUTPUT.PUT_LINE(' Inserted '|| SQL%ROWCOUNT ||' row ');
+END; 
+/
+
+Invoking the Procedure
+_______________________
+
+BEGIN
+ add_TRAINEE;
+END;
+/
+SELECT EMPLOYEE_ID, SURNAME FROM TRAINEE WHERE EMPLOYEE_ID=901;
+
+------------------------------------------------------------------
+
+PROCEDURES
+
+THAT CALCULATES TOTAL AMOUNT OF FINES 
+
+declare
+v_fine_amount fine.amount%TYPE:=5;
+v_date_issue issue_book.issuedate%TYPE:=to_date('&date_issue','DD-MM-YYYY');
+v_date_return issue_book.returndate%TYPE:=sysdate;
+v_noOfdays number(10);
+
+begin
+v_noOfdays := v_date_return - v_date_issue;
+v_total_amount := v_fine_amount * v_noofdays;
+
+DBMS_OUTPUT.PUT_LINE('The Number Of Days: '||v_noOfdays || ' ' || 'Total Fine Amount: R'||v_total_amount);
+End;
+/ 
+
+
+-------------------------------------------------------------------
+
+
+********************************************************************************************************************
+REPORTS 
+
+AVAILABLE BOOKS
+
+column ISBNNO 	Heading 'ISBNNO'
+column TITTLE 	Heading 'TITLE'
+column AUTHOR	Heading 'AUTHOR'
+column STATUS  Heading 'STATUS'
+column QUANTITY  Heading 'QUANTITY'
+
+
+set linesize 150
+set serveroutput on
+set echo off
+
+select * from book
+WHERE BOOK.STATUS = 'Available';
+
+
+ALL LOST BOOKS***********************************
+
+column L_ISBNNO 	Heading 'ISBNNO'
+column TITTLE 	Heading 'TITLE'
+column AUTHOR	Heading 'AUTHOR'
+column STATUS  Heading 'STATUS'
+column QUANTITY  Heading 'QUANTITY'
+
+
+
+set linesize 150
+set serveroutput on
+set echo off
+
+select * from LOST_BOOKS;
+
+ALL BOOKS TOOK BY A STUDENTS***************************
+
+
+
+column STUDENTNO 	Heading 'STUDENT NUMBER'
+column ISBNNO 	Heading 'ISBNNO'
+column INVOICENO	Heading 'INVOICE NUMBER'
+column EMPLOYEEID  Heading 'EMPLOYEE IDENTIFICATION'
+column DATE_ISSUE  Heading 'CHECKED OUT DATE'
+column DATE_RETURN	Heading 'RETURN DATE'
+
+
+set linesize 150
+set serveroutput on
+set echo off
+
+
+
+select * from ISSUED_BOOK;
+
